@@ -40,8 +40,8 @@ public class MutablePoolingContextSource extends PoolingContextSource {
 			throw new DataAccessResourceFailureException("Failed to borrow DirContext from pool.", ex);
 		}
 
-		if (dirContext instanceof LdapContext) {
-			return new MutableDelegatingLdapContext(this.keyedObjectPool, (LdapContext) dirContext, dirContextType);
+		if (dirContext instanceof LdapContext context) {
+			return new MutableDelegatingLdapContext(this.keyedObjectPool, context, dirContextType);
 		}
 
 		return new DelegatingDirContext(this.keyedObjectPool, dirContext, dirContextType);

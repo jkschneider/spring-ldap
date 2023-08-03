@@ -588,8 +588,8 @@ class DefaultLdapClient implements LdapClient {
 
 		@Override
 		public BindSpec object(Object obj) {
-			if (obj instanceof DirContextOperations) {
-				boolean updateMode = ((DirContextOperations) obj).isUpdateMode();
+			if (obj instanceof DirContextOperations operations) {
+				boolean updateMode = operations.isUpdateMode();
 				Assert.isTrue(!updateMode, "DirContextOperations must not be in update mode");
 			}
 			this.obj = obj;

@@ -195,7 +195,7 @@ public final class SchemaToJavaTests {
 		testDn.addAll(LdapUtils.newLdapName("cn=William Hartnell,ou=Doctors"));
 		Object fromDirectory = odmManager.read(clazz, testDn);
 
-		LOG.debug(String.format("Read - %1$s", fromDirectory));
+		LOG.debug("Read - %1$s".formatted(fromDirectory));
 
 		// Check some returned values
 		Method getDnMethod = clazz.getMethod("getDn");

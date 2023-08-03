@@ -175,8 +175,8 @@ public final class ConverterManagerTests {
 
 		@Override
 		public String toString() {
-			return String.format("sourceData=%1$s | syntax=%2$s | destClass=%3$s | expectedValue=%4$s", this.sourceData,
-					this.syntax, this.destClass, this.expectedValue);
+			return "sourceData=%1$s | syntax=%2$s | destClass=%3$s | expectedValue=%4$s".formatted(this.sourceData,
+this.syntax, this.destClass, this.expectedValue);
 		}
 
 	}

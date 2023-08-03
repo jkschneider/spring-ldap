@@ -91,7 +91,7 @@ import org.springframework.util.StringUtils;
 
 	ObjectMetaData(Class<?> clazz) {
 		if (LOG.isDebugEnabled()) {
-			LOG.debug(String.format("Extracting metadata from %1$s", clazz));
+			LOG.debug("Extracting metadata from %1$s".formatted(clazz));
 		}
 
 		// Get object class metadata - the @Entity annotation
@@ -116,12 +116,12 @@ import org.springframework.util.StringUtils;
 		}
 		else {
 			throw new MetaDataException(
-					String.format("Class %1$s must have a class level %2$s annotation", clazz, Entry.class));
+"Class %1$s must have a class level %2$s annotation".formatted(clazz, Entry.class));
 		}
 
 		// Check the class is final
 		if (!Modifier.isFinal(clazz.getModifiers())) {
-			LOG.warn(String.format("The Entry class %1$s should be declared final", clazz.getSimpleName()));
+			LOG.warn("The Entry class %1$s should be declared final".formatted(clazz.getSimpleName()));
 		}
 
 		// Get field meta-data - the @Attribute annotation
@@ -139,8 +139,8 @@ import org.springframework.util.StringUtils;
 			if (currentAttributeMetaData.isId()) {
 				if (this.idAttribute != null) {
 					// There can be only one id field
-					throw new MetaDataException(String.format(
-							"You man have only one field with the %1$s annotation in class %2$s", Id.class, clazz));
+					throw new MetaDataException(
+		"You man have only one field with the %1$s annotation in class %2$s".formatted(Id.class, clazz));
 				}
 				this.idAttribute = currentAttributeMetaData;
 			}
@@ -153,14 +153,14 @@ import org.springframework.util.StringUtils;
 
 		if (this.idAttribute == null) {
 			throw new MetaDataException(
-					String.format("All Entry classes must define a field with the %1$s annotation, error in class %2$s",
+"All Entry classes must define a field with the %1$s annotation, error in class %2$s".formatted(
 							Id.class, clazz));
 		}
 
 		postProcessDnAttributes(clazz);
 
 		if (LOG.isDebugEnabled()) {
-			LOG.debug(String.format("Extracted metadata from %1$s as %2$s", clazz, this));
+			LOG.debug("Extracted metadata from %1$s as %2$s".formatted(clazz, this));
 		}
 	}
 
@@ -181,8 +181,10 @@ import org.springframework.util.StringUtils;
 		}
 
 		if (hasIndexed && hasNonIndexed) {
-			throw new MetaDataException(String.format("At least one DnAttribute declared on class %s is indexed, "
-					+ "which means that all DnAttributes must be indexed", clazz.toString()));
+			throw new MetaDataException(("""
+At least one DnAttribute declared on class %s is indexed, \
+which means that all DnAttributes must be indexed\
+""").formatted(clazz.toString()));
 		}
 
 		this.indexedDnAttributes = hasIndexed;
@@ -211,8 +213,7 @@ import org.springframework.util.StringUtils;
 	 */
 	@Override
 	public String toString() {
-		return String.format("objectsClasses=%1$s | idField=%2$s | attributes=%3$s", this.objectClasses,
-				this.idAttribute.getName(), this.fieldToAttribute);
+		return "objectsClasses=%1$s | idField=%2$s | attributes=%3$s".formatted(this.objectClasses,this.idAttribute.getName(), this.fieldToAttribute);
 	}
 
 }

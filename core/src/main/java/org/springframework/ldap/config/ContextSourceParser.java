@@ -234,7 +234,7 @@ public class ContextSourceParser implements BeanDefinitionParser {
 
 		if (pooling2Element != null && poolingElement != null) {
 			throw new IllegalArgumentException(
-					String.format("%s cannot be enabled together with %s.", Elements.POOLING2, Elements.POOLING));
+"%s cannot be enabled together with %s.".formatted(Elements.POOLING2, Elements.POOLING));
 		}
 		else if (poolingElement == null && pooling2Element == null) {
 			return targetContextSourceDefinition;
@@ -242,7 +242,7 @@ public class ContextSourceParser implements BeanDefinitionParser {
 
 		if (nativePooling) {
 			throw new IllegalArgumentException(
-					String.format("%s cannot be enabled together with %s", ATT_NATIVE_POOLING, Elements.POOLING));
+"%s cannot be enabled together with %s".formatted(ATT_NATIVE_POOLING, Elements.POOLING));
 		}
 
 		if (pooling2Element != null) {
@@ -332,7 +332,7 @@ public class ContextSourceParser implements BeanDefinitionParser {
 				nonTransientExceptionClasses.add(ClassUtils.getDefaultClassLoader().loadClass(className));
 			}
 			catch (ClassNotFoundException ex) {
-				throw new IllegalArgumentException(String.format("%s is not a valid class name", className), ex);
+				throw new IllegalArgumentException("%s is not a valid class name".formatted(className), ex);
 			}
 		}
 
@@ -361,7 +361,7 @@ public class ContextSourceParser implements BeanDefinitionParser {
 				nonTransientExceptionClasses.add(ClassUtils.getDefaultClassLoader().loadClass(className));
 			}
 			catch (ClassNotFoundException ex) {
-				throw new IllegalArgumentException(String.format("%s is not a valid class name", className), ex);
+				throw new IllegalArgumentException("%s is not a valid class name".formatted(className), ex);
 			}
 		}
 

@@ -76,8 +76,8 @@ public class DelegatingLdapContext extends DelegatingDirContext implements LdapC
 	public LdapContext getInnermostDelegateLdapContext() {
 		final LdapContext delegateLdapContext = this.getDelegateLdapContext();
 
-		if (delegateLdapContext instanceof DelegatingLdapContext) {
-			return ((DelegatingLdapContext) delegateLdapContext).getInnermostDelegateLdapContext();
+		if (delegateLdapContext instanceof DelegatingLdapContext context) {
+			return context.getInnermostDelegateLdapContext();
 		}
 
 		return delegateLdapContext;
@@ -106,8 +106,8 @@ public class DelegatingLdapContext extends DelegatingDirContext implements LdapC
 
 		final LdapContext thisLdapContext = this.getInnermostDelegateLdapContext();
 		LdapContext otherLdapContext = (LdapContext) obj;
-		if (otherLdapContext instanceof DelegatingLdapContext) {
-			otherLdapContext = ((DelegatingLdapContext) otherLdapContext).getInnermostDelegateLdapContext();
+		if (otherLdapContext instanceof DelegatingLdapContext context) {
+			otherLdapContext = context.getInnermostDelegateLdapContext();
 		}
 
 		return thisLdapContext == otherLdapContext

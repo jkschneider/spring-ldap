@@ -66,11 +66,11 @@ public final class LdapTransactionUtils {
 	 * @return a Name representation of the argument, or the Name itself if it is a Name.
 	 */
 	public static Name getArgumentAsName(Object arg) {
-		if (arg instanceof String) {
-			return LdapUtils.newLdapName((String) arg);
+		if (arg instanceof String string) {
+			return LdapUtils.newLdapName(string);
 		}
-		else if (arg instanceof Name) {
-			return (Name) arg;
+		else if (arg instanceof Name name) {
+			return name;
 		}
 		else {
 			throw new IllegalArgumentException("First argument needs to be a Name or a String representation thereof");

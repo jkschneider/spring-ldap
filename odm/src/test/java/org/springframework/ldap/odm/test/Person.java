@@ -242,8 +242,7 @@ public final class Person {
 			}
 		}
 
-		return String.format(
-				"objectClasses=%1$s | dn=%2$s | cn=%3$s | sn=%4$s | desc=%5$s | telephoneNumber=%6$s | jpegPhoto=%7$s",
+		return "objectClasses=%1$s | dn=%2$s | cn=%3$s | sn=%4$s | desc=%5$s | telephoneNumber=%6$s | jpegPhoto=%7$s".formatted(
 				this.objectClasses, this.dn, this.cn, this.surname, this.desc, this.telephoneNumber, jpegString);
 	}
 

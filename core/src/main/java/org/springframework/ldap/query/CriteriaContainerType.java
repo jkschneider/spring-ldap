@@ -42,7 +42,7 @@ enum CriteriaContainerType {
 	public void validateSameType(CriteriaContainerType oldType) {
 		if (oldType != null && oldType != this) {
 			throw new IllegalStateException(
-					String.format("Container type has already been specified as %s, cannot change it to %s",
+"Container type has already been specified as %s, cannot change it to %s".formatted(
 							oldType.toString(), this.toString()));
 		}
 

@@ -81,8 +81,8 @@ public class DelegatingContext implements Context {
 	public Context getInnermostDelegateContext() {
 		final Context delegateContext = this.getDelegateContext();
 
-		if (delegateContext instanceof DelegatingContext) {
-			return ((DelegatingContext) delegateContext).getInnermostDelegateContext();
+		if (delegateContext instanceof DelegatingContext context) {
+			return context.getInnermostDelegateContext();
 		}
 
 		return delegateContext;
@@ -112,8 +112,8 @@ public class DelegatingContext implements Context {
 
 		final Context thisContext = this.getInnermostDelegateContext();
 		Context otherContext = (Context) obj;
-		if (otherContext instanceof DelegatingContext) {
-			otherContext = ((DelegatingContext) otherContext).getInnermostDelegateContext();
+		if (otherContext instanceof DelegatingContext context) {
+			otherContext = context.getInnermostDelegateContext();
 		}
 
 		return thisContext == otherContext || (thisContext != null && thisContext.equals(otherContext));
@@ -176,8 +176,7 @@ public class DelegatingContext implements Context {
 		try {
 			boolean valid = true;
 
-			if (context instanceof FailureAwareContext) {
-				FailureAwareContext failureAwareContext = (FailureAwareContext) context;
+			if (context instanceof FailureAwareContext failureAwareContext) {
 				if (failureAwareContext.hasFailed()) {
 					valid = false;
 				}

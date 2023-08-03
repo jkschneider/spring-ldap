@@ -127,13 +127,13 @@ public final class ConverterManagerFactoryBean implements FactoryBean {
 					|| converterConfig.converter == null) {
 
 				throw new FactoryBeanNotInitializedException(
-						String.format("All of fromClasses, toClasses and converter must be specified in bean %1$s",
+	"All of fromClasses, toClasses and converter must be specified in bean %1$s".formatted(
 								converterConfig.toString()));
 			}
 			for (Class<?> fromClass : converterConfig.fromClasses) {
 				for (Class<?> toClass : converterConfig.toClasses) {
 					if (LOG.isDebugEnabled()) {
-						LOG.debug(String.format("Adding converter from %1$s to %2$s", fromClass, toClass));
+						LOG.debug("Adding converter from %1$s to %2$s".formatted(fromClass, toClass));
 					}
 					result.addConverter(fromClass, converterConfig.syntax, toClass, converterConfig.converter);
 				}
@@ -213,8 +213,8 @@ public final class ConverterManagerFactoryBean implements FactoryBean {
 
 		@Override
 		public String toString() {
-			return String.format("fromClasses=%1$s, syntax=%2$s, toClasses=%3$s, converter=%4$s", this.fromClasses,
-					this.syntax, this.toClasses, this.converter);
+			return "fromClasses=%1$s, syntax=%2$s, toClasses=%3$s, converter=%4$s".formatted(this.fromClasses,
+this.syntax, this.toClasses, this.converter);
 		}
 
 	}

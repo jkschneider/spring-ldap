@@ -114,7 +114,7 @@ public class LdapTemplateOdmWithDnAnnotationsITests extends AbstractLdapTemplate
 			}
 		}
 
-		fail(String.format("Person with cn %s not found", cn));
+		fail("Person with cn %s not found".formatted(cn));
 		// we'll never get here
 		return null;
 	}

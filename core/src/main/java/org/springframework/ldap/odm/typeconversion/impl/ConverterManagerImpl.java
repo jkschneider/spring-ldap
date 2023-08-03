@@ -165,7 +165,7 @@ public final class ConverterManagerImpl implements ConverterManager {
 
 		if (result == null) {
 			throw new ConverterException(
-					String.format("Cannot convert %1$s of class %2$s via syntax %3$s to class %4$s", source,
+"Cannot convert %1$s of class %2$s via syntax %3$s to class %4$s".formatted(source,
 							source.getClass(), syntax, toClass));
 		}
 

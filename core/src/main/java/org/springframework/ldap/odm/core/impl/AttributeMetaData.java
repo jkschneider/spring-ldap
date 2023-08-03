@@ -149,21 +149,21 @@ import org.springframework.ldap.odm.annotations.Transient;
 			}
 			catch (ClassCastException ex) {
 				throw new MetaDataException(
-						String.format("Can't determine destination type for field %1$s in Entry class %2$s", field,
+	"Can't determine destination type for field %1$s in Entry class %2$s".formatted(field,
 								field.getDeclaringClass()),
 						ex);
 			}
 			Type[] actualParamArguments = paramType.getActualTypeArguments();
 			if (actualParamArguments.length == 1) {
-				if (actualParamArguments[0] instanceof Class) {
-					this.valueClass = (Class<?>) actualParamArguments[0];
+				if (actualParamArguments[0] instanceof Class class1) {
+					this.valueClass = class1;
 				}
 				else {
-					if (actualParamArguments[0] instanceof GenericArrayType) {
+					if (actualParamArguments[0] instanceof GenericArrayType arrayType) {
 						// Deal with arrays
-						Type type = ((GenericArrayType) actualParamArguments[0]).getGenericComponentType();
-						if (type instanceof Class) {
-							this.valueClass = Array.newInstance((Class<?>) type, 0).getClass();
+						Type type = arrayType.getGenericComponentType();
+						if (type instanceof Class class1) {
+							this.valueClass = Array.newInstance(class1, 0).getClass();
 						}
 					}
 				}
@@ -172,8 +172,8 @@ import org.springframework.ldap.odm.annotations.Transient;
 
 		// Check we have been able to determine the value class
 		if (this.valueClass == null) {
-			throw new MetaDataException(String.format("Can't determine destination type for field %1$s in class %2$s",
-					field, field.getDeclaringClass()));
+			throw new MetaDataException("Can't determine destination type for field %1$s in class %2$s".formatted(
+field, field.getDeclaringClass()));
 		}
 	}
 
@@ -190,7 +190,7 @@ import org.springframework.ldap.odm.annotations.Transient;
 				this.collectionClass = LinkedHashSet.class;
 			}
 			else {
-				throw new MetaDataException(String.format("Collection class %s is not supported", fieldType));
+				throw new MetaDataException("Collection class %s is not supported".formatted(fieldType));
 			}
 		}
 		else {
@@ -201,7 +201,7 @@ import org.springframework.ldap.odm.annotations.Transient;
 	@SuppressWarnings("unchecked")
 	Collection<Object> newCollectionInstance() {
 		try {
-			return (Collection<Object>) this.collectionClass.newInstance();
+			return (Collection<Object>) this.collectionClass.getDeclaredConstructor().newInstance();
 		}
 		catch (Exception ex) {
 			throw new UncategorizedLdapException("Failed to instantiate collection class", ex);
@@ -217,8 +217,8 @@ import org.springframework.ldap.odm.annotations.Transient;
 		if (this.isId) {
 			// It must be of type Name or a subclass of that of
 			if (!Name.class.isAssignableFrom(fieldType)) {
-				throw new MetaDataException(String.format(
-						"The id field must be of type javax.naming.Name or a subclass that of in Entry class %1$s",
+				throw new MetaDataException(
+	"The id field must be of type javax.naming.Name or a subclass that of in Entry class %1$s".formatted(
 						field.getDeclaringClass()));
 			}
 		}
@@ -233,7 +233,7 @@ import org.springframework.ldap.odm.annotations.Transient;
 		this.dnAttribute = field.getAnnotation(DnAttribute.class);
 		if (this.dnAttribute != null && !field.getType().equals(String.class)) {
 			throw new MetaDataException(
-					String.format("%s is of type %s, but only String attributes can be declared as @DnAttributes",
+"%s is of type %s, but only String attributes can be declared as @DnAttributes".formatted(
 							field.toString(), field.getType().toString()));
 		}
 
@@ -254,15 +254,15 @@ import org.springframework.ldap.odm.annotations.Transient;
 
 		// Check that the field has not been annotated with both @Attribute and with @Id
 		if (foundAttributeAnnotation && foundIdAnnoation) {
-			throw new MetaDataException(String.format(
-					"You may not specifiy an %1$s annoation and an %2$s annotation on the same field, error in field %3$s in Entry class %4$s",
+			throw new MetaDataException(
+"You may not specifiy an %1$s annoation and an %2$s annotation on the same field, error in field %3$s in Entry class %4$s".formatted(
 					Id.class, Attribute.class, field.getName(), field.getDeclaringClass()));
 		}
 
 		// If this is the objectclass attribute then it must be of type List<String>
 		if (isObjectClass() && (!isCollection() || this.valueClass != String.class)) {
 			throw new MetaDataException(
-					String.format("The type of the objectclass attribute must be List<String> in classs %1$s",
+"The type of the objectclass attribute must be List<String> in classs %1$s".formatted(
 							field.getDeclaringClass()));
 		}
 	}
@@ -338,8 +338,7 @@ import org.springframework.ldap.odm.annotations.Transient;
 	 */
 	@Override
 	public String toString() {
-		return String.format(
-				"name=%1$s | field=%2$s | valueClass=%3$s | syntax=%4$s| isBinary=%5$s | isId=%6$s | isReadOnly=%7$s |  isList=%8$s | isObjectClass=%9$s",
+		return "name=%1$s | field=%2$s | valueClass=%3$s | syntax=%4$s| isBinary=%5$s | isId=%6$s | isReadOnly=%7$s |  isList=%8$s | isObjectClass=%9$s".formatted(
 				getName(), getField(), getValueClass(), getSyntax(), isBinary(), isId(), isReadOnly(), isCollection(),
 				isObjectClass());
 	}

@@ -60,8 +60,8 @@ public class ContextMapperCallbackHandlerWithControls<T> extends ContextMapperCa
 			throw new ObjectRetrievalException("Binding did not contain any object.");
 		}
 		T result;
-		if (nameClassPair instanceof HasControls) {
-			result = this.mapper.mapFromContextWithControls(object, (HasControls) nameClassPair);
+		if (nameClassPair instanceof HasControls controls) {
+			result = this.mapper.mapFromContextWithControls(object, controls);
 		}
 		else {
 			result = this.mapper.mapFromContext(object);

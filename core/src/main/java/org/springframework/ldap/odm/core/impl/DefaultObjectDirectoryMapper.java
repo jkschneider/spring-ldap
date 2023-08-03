@@ -141,7 +141,7 @@ public class DefaultObjectDirectoryMapper implements ObjectDirectoryMapper {
 	 */
 	private EntityData addManagedClass(Class<?> managedClass) {
 		if (LOG.isDebugEnabled()) {
-			LOG.debug(String.format("Adding class %1$s to managed set", managedClass));
+			LOG.debug("Adding class %1$s to managed set".formatted(managedClass));
 		}
 
 		// Extract the meta-data from the class
@@ -154,7 +154,7 @@ public class DefaultObjectDirectoryMapper implements ObjectDirectoryMapper {
 		}
 		catch (NoSuchMethodException ex) {
 			throw new InvalidEntryException(
-					String.format("The class %1$s must have a zero argument constructor to be an Entry", managedClass),
+"The class %1$s must have a zero argument constructor to be an Entry".formatted(managedClass),
 					ex);
 		}
 
@@ -187,13 +187,13 @@ public class DefaultObjectDirectoryMapper implements ObjectDirectoryMapper {
 		Class<?> javaClass = attributeInfo.getValueClass();
 		if (!this.converterManager.canConvert(jndiClass, attributeInfo.getSyntax(), javaClass)) {
 			throw new InvalidEntryException(
-					String.format("Missing converter from %1$s to %2$s, this is needed for field %3$s on Entry %4$s",
+"Missing converter from %1$s to %2$s, this is needed for field %3$s on Entry %4$s".formatted(
 							jndiClass, javaClass, field.getName(), managedClass));
 		}
 		if (!attributeInfo.isReadOnly()
 				&& !this.converterManager.canConvert(javaClass, attributeInfo.getSyntax(), jndiClass)) {
 			throw new InvalidEntryException(
-					String.format("Missing converter from %1$s to %2$s, this is needed for field %3$s on Entry %4$s",
+"Missing converter from %1$s to %2$s, this is needed for field %3$s on Entry %4$s".formatted(
 							javaClass, jndiClass, field.getName(), managedClass));
 		}
 	}
@@ -243,7 +243,7 @@ public class DefaultObjectDirectoryMapper implements ObjectDirectoryMapper {
 					}
 				}
 				catch (IllegalAccessException ex) {
-					throw new InvalidEntryException(String.format("Can't set attribute %1$s", attributeInfo.getName()),
+					throw new InvalidEntryException("Can't set attribute %1$s".formatted(attributeInfo.getName()),
 							ex);
 				}
 			}
@@ -287,7 +287,7 @@ public class DefaultObjectDirectoryMapper implements ObjectDirectoryMapper {
 	@Override
 	public <T> T mapFromLdapDataEntry(LdapDataEntry context, Class<T> clazz) {
 		if (LOG.isDebugEnabled()) {
-			LOG.debug(String.format("Converting to Java Entry class %1$s from %2$s", clazz, context));
+			LOG.debug("Converting to Java Entry class %1$s from %2$s".formatted(clazz, context));
 		}
 
 		// The Java representation of the LDAP entry
@@ -330,7 +330,7 @@ public class DefaultObjectDirectoryMapper implements ObjectDirectoryMapper {
 			}
 			else {
 				throw new InvalidEntryException(
-						String.format("No object classes were returned for class %1$s", clazz.getName()));
+	"No object classes were returned for class %1$s".formatted(clazz.getName()));
 			}
 
 			// Now loop through all the fields in the Java representation populating it
@@ -375,19 +375,19 @@ public class DefaultObjectDirectoryMapper implements ObjectDirectoryMapper {
 			}
 		}
 		catch (NamingException ne) {
-			throw new InvalidEntryException(String.format("Problem creating %1$s from LDAP Entry %2$s", clazz, context),
+			throw new InvalidEntryException("Problem creating %1$s from LDAP Entry %2$s".formatted(clazz, context),
 					ne);
 		}
 		catch (IllegalAccessException iae) {
 			throw new InvalidEntryException(
-					String.format("Could not create an instance of %1$s could not access field", clazz.getName()), iae);
+"Could not create an instance of %1$s could not access field".formatted(clazz.getName()), iae);
 		}
 		catch (InstantiationException ie) {
-			throw new InvalidEntryException(String.format("Could not instantiate %1$s", clazz), ie);
+			throw new InvalidEntryException("Could not instantiate %1$s".formatted(clazz), ie);
 		}
 
 		if (LOG.isDebugEnabled()) {
-			LOG.debug(String.format("Converted object - %1$s", result));
+			LOG.debug("Converted object - %1$s".formatted(result));
 		}
 
 		return result;
@@ -447,7 +447,7 @@ public class DefaultObjectDirectoryMapper implements ObjectDirectoryMapper {
 			return (Name) getIdField(entry).get(entry);
 		}
 		catch (Exception ex) {
-			throw new InvalidEntryException(String.format("Can't get Id field from Entry %1$s", entry), ex);
+			throw new InvalidEntryException("Can't get Id field from Entry %1$s".formatted(entry), ex);
 		}
 	}
 
@@ -461,7 +461,7 @@ public class DefaultObjectDirectoryMapper implements ObjectDirectoryMapper {
 			getIdField(entry).set(entry, id);
 		}
 		catch (Exception ex) {
-			throw new InvalidEntryException(String.format("Can't set Id field on Entry %s to %s", entry, id), ex);
+			throw new InvalidEntryException("Can't set Id field on Entry %s to %s".formatted(entry, id), ex);
 		}
 	}
 
@@ -477,8 +477,7 @@ public class DefaultObjectDirectoryMapper implements ObjectDirectoryMapper {
 				Object dnFieldValue = ReflectionUtils.getField(dnAttribute.getField(), entry);
 				if (dnFieldValue == null) {
 					throw new IllegalStateException(
-							String.format("DnAttribute for field %s on class %s is null; cannot build DN",
-									dnAttribute.getField().getName(), entry.getClass().getName()));
+		"DnAttribute for field %s on class %s is null; cannot build DN".formatted(dnAttribute.getField().getName(), entry.getClass().getName()));
 				}
 
 				ldapNameBuilder.add(dnAttribute.getDnAttribute().value(), dnFieldValue.toString());
@@ -510,7 +509,7 @@ public class DefaultObjectDirectoryMapper implements ObjectDirectoryMapper {
 			return attributeMetaData.getName().toString();
 		}
 		catch (NoSuchFieldException ex) {
-			throw new IllegalArgumentException(String.format("Field %s cannot be found in class %s", fieldName, clazz),
+			throw new IllegalArgumentException("Field %s cannot be found in class %s".formatted(fieldName, clazz),
 					ex);
 		}
 	}

@@ -295,9 +295,9 @@ public final class LdapUtils {
 		Assert.notNull(attribute, "Attribute must not be null");
 		Assert.notNull(callbackHandler, "callbackHandler must not be null");
 
-		if (attribute instanceof Iterable) {
+		if (attribute instanceof Iterable iterable) {
 			int i = 0;
-			for (Object obj : (Iterable) attribute) {
+			for (Object obj : iterable) {
 				handleAttributeValue(attribute.getID(), obj, i, callbackHandler);
 				i++;
 			}
@@ -354,8 +354,7 @@ public final class LdapUtils {
 		if (name instanceof LdapName) {
 			return (LdapName) name.clone();
 		}
-		else if (name instanceof CompositeName) {
-			CompositeName compositeName = (CompositeName) name;
+		else if (name instanceof CompositeName compositeName) {
 
 			try {
 				return new LdapName(convertCompositeNameToString(compositeName));
@@ -397,8 +396,8 @@ public final class LdapUtils {
 	}
 
 	private static LdapName returnOrConstructLdapNameFromName(Name name) {
-		if (name instanceof LdapName) {
-			return (LdapName) name;
+		if (name instanceof LdapName ldapName) {
+			return ldapName;
 		}
 		else {
 			return newLdapName(name);

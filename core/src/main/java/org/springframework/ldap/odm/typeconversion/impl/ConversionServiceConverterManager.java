@@ -43,7 +43,7 @@ public class ConversionServiceConverterManager implements ConverterManager {
 		if (ClassUtils.isPresent(DEFAULT_CONVERSION_SERVICE_CLASS, defaultClassLoader)) {
 			try {
 				Class<?> clazz = ClassUtils.forName(DEFAULT_CONVERSION_SERVICE_CLASS, defaultClassLoader);
-				this.conversionService = (GenericConversionService) clazz.newInstance();
+				this.conversionService = (GenericConversionService) clazz.getDeclaredConstructor().newInstance();
 			}
 			catch (Exception ex) {
 				ReflectionUtils.handleReflectionException(ex);

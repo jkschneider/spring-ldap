@@ -151,16 +151,16 @@ public class LdapAttributes extends BasicAttributes {
 				while (values.hasMore()) {
 					Object value = values.next();
 
-					if (value instanceof String) {
-						sb.append(attribute.getID() + ": " + (String) value + "\n");
+					if (value instanceof String string) {
+						sb.append(attribute.getID() + ": " + string + "\n");
 
 					}
-					else if (value instanceof byte[]) {
-						sb.append(attribute.getID() + ":: " + LdapEncoder.printBase64Binary((byte[]) value) + "\n");
+					else if (value instanceof byte[] bytes) {
+						sb.append(attribute.getID() + ":: " + LdapEncoder.printBase64Binary(bytes) + "\n");
 
 					}
-					else if (value instanceof URI) {
-						sb.append(attribute.getID() + ":< " + (URI) value + "\n");
+					else if (value instanceof URI rI) {
+						sb.append(attribute.getID() + ":< " + rI + "\n");
 
 					}
 					else {

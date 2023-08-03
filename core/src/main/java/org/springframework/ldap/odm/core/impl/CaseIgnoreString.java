@@ -33,7 +33,7 @@ import org.springframework.util.Assert;
 
 	@Override
 	public boolean equals(Object other) {
-		return other instanceof CaseIgnoreString && ((CaseIgnoreString) other).string.equalsIgnoreCase(this.string);
+		return other instanceof CaseIgnoreString cis && cis.string.equalsIgnoreCase(this.string);
 	}
 
 	@Override

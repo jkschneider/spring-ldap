@@ -134,7 +134,7 @@ public final class NameAwareAttributes implements Attributes {
 
 	@Override
 	public String toString() {
-		return String.format("NameAwareAttribute; attributes: %s", this.attributes.toString());
+		return "NameAwareAttribute; attributes: %s".formatted(this.attributes.toString());
 	}
 
 }

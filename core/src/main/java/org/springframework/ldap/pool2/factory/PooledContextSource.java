@@ -261,8 +261,8 @@ public class PooledContextSource extends DelegatingBaseLdapPathContextSourceSupp
 			throw new DataAccessResourceFailureException("Failed to borrow DirContext from pool.", ex);
 		}
 
-		if (dirContext instanceof LdapContext) {
-			return new DelegatingLdapContext(this.keyedObjectPool, (LdapContext) dirContext, dirContextType);
+		if (dirContext instanceof LdapContext context) {
+			return new DelegatingLdapContext(this.keyedObjectPool, context, dirContextType);
 		}
 
 		return new DelegatingDirContext(this.keyedObjectPool, dirContext, dirContextType);

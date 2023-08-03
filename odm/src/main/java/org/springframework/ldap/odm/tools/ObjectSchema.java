@@ -122,7 +122,7 @@ public final class ObjectSchema {
 	 */
 	@Override
 	public String toString() {
-		return String.format("objectClass=%1$s | must=%2$s | may=%3$s", this.objectClass, this.must, this.may);
+		return "objectClass=%1$s | must=%2$s | may=%3$s".formatted(this.objectClass, this.must, this.may);
 	}
 
 }

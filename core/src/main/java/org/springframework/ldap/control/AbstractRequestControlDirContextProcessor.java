@@ -78,12 +78,15 @@ public abstract class AbstractRequestControlDirContextProcessor implements DirCo
 	 */
 	public void preProcess(DirContext ctx) throws NamingException {
 		LdapContext ldapContext;
-		if (ctx instanceof LdapContext) {
-			ldapContext = (LdapContext) ctx;
+		if (ctx instanceof LdapContext context) {
+			ldapContext = context;
 		}
 		else {
 			throw new IllegalArgumentException(
-					"Request Control operations require LDAPv3 - " + "Context must be of type LdapContext");
+					"""
+					Request Control operations require LDAPv3 - \
+					Context must be of type LdapContext\
+					""");
 		}
 
 		Control[] requestControls = ldapContext.getRequestControls();

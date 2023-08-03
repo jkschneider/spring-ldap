@@ -77,8 +77,7 @@ public final class NameAwareAttribute implements Attribute, Iterable<Object> {
 			throw LdapUtils.convertLdapException(ex);
 		}
 
-		if (attribute instanceof NameAwareAttribute) {
-			NameAwareAttribute nameAwareAttribute = (NameAwareAttribute) attribute;
+		if (attribute instanceof NameAwareAttribute nameAwareAttribute) {
 			populateValuesAsNames(nameAwareAttribute, this);
 		}
 	}
@@ -133,10 +132,10 @@ public final class NameAwareAttribute implements Attribute, Iterable<Object> {
 
 	@Override
 	public boolean add(Object attrVal) {
-		if (attrVal instanceof Name) {
+		if (attrVal instanceof Name name1) {
 			initValuesAsNames();
 
-			Name name = LdapUtils.newLdapName((Name) attrVal);
+			Name name = LdapUtils.newLdapName(name1);
 			String currentValue = this.valuesAsNames.get(name);
 			String nameAsString = name.toString();
 			if (currentValue == null) {
@@ -164,24 +163,28 @@ public final class NameAwareAttribute implements Attribute, Iterable<Object> {
 
 		Map<Name, String> newValuesAsNames = new HashMap<Name, String>();
 		for (Object value : this.values) {
-			if (value instanceof String) {
-				String s = (String) value;
+			if (value instanceof String s) {
 				try {
 					newValuesAsNames.put(LdapUtils.newLdapName(s), s);
 				}
 				catch (InvalidNameException ex) {
 					throw new IllegalArgumentException(
-							"This instance has values that are not valid distinguished names; "
-									+ "cannot handle Name values",
+							"""
+							This instance has values that are not valid distinguished names; \
+							cannot handle Name values\
+							""",
 							ex);
 				}
 			}
-			else if (value instanceof LdapName) {
-				newValuesAsNames.put((LdapName) value, value.toString());
+			else if (value instanceof LdapName name) {
+				newValuesAsNames.put(name, value.toString());
 			}
 			else {
 				throw new IllegalArgumentException(
-						"This instance has non-string attribute values; " + "cannot handle Name values");
+						"""
+						This instance has non-string attribute values; \
+						cannot handle Name values\
+						""");
 			}
 		}
 
@@ -194,10 +197,10 @@ public final class NameAwareAttribute implements Attribute, Iterable<Object> {
 
 	@Override
 	public boolean remove(Object attrval) {
-		if (attrval instanceof Name) {
+		if (attrval instanceof Name name1) {
 			initValuesAsNames();
 
-			Name name = LdapUtils.newLdapName((Name) attrval);
+			Name name = LdapUtils.newLdapName(name1);
 			String removedValue = this.valuesAsNames.remove(name);
 			if (removedValue != null) {
 				this.values.remove(removedValue);
@@ -264,9 +267,9 @@ public final class NameAwareAttribute implements Attribute, Iterable<Object> {
 				value = iterator.next();
 			}
 			iterator.remove();
-			if (value instanceof String) {
+			if (value instanceof String string) {
 				try {
-					this.valuesAsNames.remove(new LdapName((String) value));
+					this.valuesAsNames.remove(new LdapName(string));
 				}
 				catch (javax.naming.InvalidNameException ignored) {
 				}
@@ -378,8 +381,7 @@ public final class NameAwareAttribute implements Attribute, Iterable<Object> {
 
 	@Override
 	public String toString() {
-		return String.format("NameAwareAttribute; id: %s; hasValuesAsNames: %s; orderMatters: %s; values: %s", this.id,
-				hasValuesAsNames(), this.orderMatters, this.values);
+		return "NameAwareAttribute; id: %s; hasValuesAsNames: %s; orderMatters: %s; values: %s".formatted(this.id,hasValuesAsNames(), this.orderMatters, this.values);
 	}
 
 	@Override

@@ -63,8 +63,7 @@ public class BaseLdapPathBeanPostProcessor implements BeanPostProcessor, Applica
 
 	@Override
 	public Object postProcessBeforeInitialization(Object bean, String beanName) {
-		if (bean instanceof BaseLdapNameAware) {
-			BaseLdapNameAware baseLdapNameAware = (BaseLdapNameAware) bean;
+		if (bean instanceof BaseLdapNameAware baseLdapNameAware) {
 
 			if (this.basePath != null) {
 				baseLdapNameAware.setBaseLdapPath(LdapUtils.newLdapName(this.basePath));
@@ -74,8 +73,7 @@ public class BaseLdapPathBeanPostProcessor implements BeanPostProcessor, Applica
 				baseLdapNameAware.setBaseLdapPath(LdapUtils.newLdapName(ldapPathSource.getBaseLdapName()));
 			}
 		}
-		else if (bean instanceof BaseLdapPathAware) {
-			BaseLdapPathAware baseLdapPathAware = (BaseLdapPathAware) bean;
+		else if (bean instanceof BaseLdapPathAware baseLdapPathAware) {
 
 			if (this.basePath != null) {
 				baseLdapPathAware.setBaseLdapPath(new DistinguishedName(this.basePath));
@@ -110,8 +108,10 @@ public class BaseLdapPathBeanPostProcessor implements BeanPostProcessor, Applica
 					if (found != null) {
 						// More than one found - nothing much to do.
 						throw new NoSuchBeanDefinitionException(
-								"More than BaseLdapPathSource implementation definition found in current ApplicationContext; "
-										+ "unable to determine the one to use. Please specify 'baseLdapPathSourceName'");
+								"""
+								More than BaseLdapPathSource implementation definition found in current ApplicationContext; \
+								unable to determine the one to use. Please specify 'baseLdapPathSourceName'\
+								""");
 					}
 
 					found = bean;
@@ -120,9 +120,11 @@ public class BaseLdapPathBeanPostProcessor implements BeanPostProcessor, Applica
 
 			if (found == null) {
 				throw new NoSuchBeanDefinitionException(
-						"More than BaseLdapPathSource implementation definition found in current ApplicationContext; "
-								+ "unable to determine the one to use (one of them should be an AbstractContextSource instance). "
-								+ "Please specify 'baseLdapPathSourceName'");
+						"""
+						More than BaseLdapPathSource implementation definition found in current ApplicationContext; \
+						unable to determine the one to use (one of them should be an AbstractContextSource instance). \
+						Please specify 'baseLdapPathSourceName'\
+						""");
 			}
 
 			return found;

@@ -157,8 +157,7 @@ public final class AttributeSchema {
 	@Override
 	public String toString() {
 
-		return String.format(
-				"{ name=%1$s, syntax=%2$s, isMultiValued=%3$s, isPrimitive=%4$s, isBinary=%5$s, isArray=%6$s, scalarType=%7$s }",
+		return "{ name=%1$s, syntax=%2$s, isMultiValued=%3$s, isPrimitive=%4$s, isBinary=%5$s, isArray=%6$s, scalarType=%7$s }".formatted(
 				this.name, this.syntax, this.isMultiValued, this.isPrimitive, this.isBinary, this.isArray,
 				this.scalarType);
 	}

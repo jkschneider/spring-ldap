@@ -128,8 +128,7 @@ public abstract class AbstractTlsDirContextAuthenticationStrategy implements Dir
 	public final DirContext processContextAfterCreation(DirContext ctx, String userDn, String password)
 			throws NamingException {
 
-		if (ctx instanceof LdapContext) {
-			final LdapContext ldapCtx = (LdapContext) ctx;
+		if (ctx instanceof LdapContext ldapCtx) {
 			final StartTlsResponse tlsResponse = (StartTlsResponse) ldapCtx.extendedOperation(new StartTlsRequest());
 			try {
 				if (this.hostnameVerifier != null) {

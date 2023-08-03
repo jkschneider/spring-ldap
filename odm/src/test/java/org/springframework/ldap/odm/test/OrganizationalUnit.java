@@ -168,8 +168,7 @@ public final class OrganizationalUnit {
 
 	@Override
 	public String toString() {
-		return String.format("objectClasses=%1$s | dn=%2$s | ou=%3$s | street=%4$s | description=%5$s",
-				this.objectClass, this.dn, this.ou, this.street, this.description);
+		return "objectClasses=%1$s | dn=%2$s | ou=%3$s | street=%4$s | description=%5$s".formatted(this.objectClass, this.dn, this.ou, this.street, this.description);
 	}
 
 }

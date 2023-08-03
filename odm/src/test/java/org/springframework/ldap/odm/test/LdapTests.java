@@ -99,26 +99,28 @@ public final class LdapTests {
 	private static byte[] photo;
 	static {
 		try {
-			String photoString = "/9j/4AAQSkZJRgABAQEAYABgAAD/2wBDAAgGBgcGBQgHBwcJCQgKDBQNDAsLDBkS"
-					+ "Ew8UHRofHh0aHBwgJC4nICIsIxwcKDcpLDAxNDQ0Hyc5PTgyPC4zNDL/2wBDAQkJCQwLDBgNDRg"
-					+ "yIRwhMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjL/wA"
-					+ "ARCAAnABoDASIAAhEBAxEB/8QAHwAAAQUBAQEBAQEAAAAAAAAAAAECAwQFBgcICQoL/8QAtRAAA"
-					+ "gEDAwIEAwUFBAQAAAF9AQIDAAQRBRIhMUEGE1FhByJxFDKBkaEII0KxwRVS0fAkM2JyggkKFhcY"
-					+ "GRolJicoKSo0NTY3ODk6Q0RFRkdISUpTVFVWV1hZWmNkZWZnaGlqc3R1dnd4eXqDhIWGh4iJipK"
-					+ "TlJWWl5iZmqKjpKWmp6ipqrKztLW2t7i5usLDxMXGx8jJytLT1NXW19jZ2uHi4+Tl5ufo6erx8v"
-					+ "P09fb3+Pn6/8QAHwEAAwEBAQEBAQEBAQAAAAAAAAECAwQFBgcICQoL/8QAtREAAgECBAQDBAcFB"
-					+ "AQAAQJ3AAECAxEEBSExBhJBUQdhcRMiMoEIFEKRobHBCSMzUvAVYnLRChYkNOEl8RcYGRomJygp"
-					+ "KjU2Nzg5OkNERUZHSElKU1RVVldYWVpjZGVmZ2hpanN0dXZ3eHl6goOEhYaHiImKkpOUlZaXmJm"
-					+ "aoqOkpaanqKmqsrO0tba3uLm6wsPExcbHyMnK0tPU1dbX2Nna4uPk5ebn6Onq8vP09fb3+Pn6/9"
-					+ "oADAMBAAIRAxEAPwDx2z0mK6gV/tSo2SCpUHGD9Qa2vDvgGfX7+eI3ot4EOEmEefMOOcZPQdOvW"
-					+ "s3VLGzsWiihUvM0ayONxATPIHXk4wfxFdd4L1aw0rw3eS3V3GHWRswkgugwCpVSckEk9OhB9azu"
-					+ "2ro6lCKnyyZwmvaHcaBrV1plxKkkluw+dRkMCAQfbgjiqi27sob1GfuVc1q9n1XVL3UdqxJI/wD"
-					+ "q/MXIXGAMd+B2HWoUZ1jUbZeABwKqzMJWT0Ld3cfaJ5ZFYtnCg+oUBf6V2XhvwVpcvhxfFXibVF"
-					+ "tNK3lEgjJ3yMGK7SRzkkHhRnHORXJQ6exVXB2r1K9Cfx7V0UWpeD7S3WJ9N1TUPLYssV7cBYkZg"
-					+ "AxAU4zwOcZ4HoKtppWQ4tSk5SNPx14o8M3/AITXT/D2kRRxB1jE4RIyuOc7ME84PzcHr2PPmX2y"
-					+ "YcZX8q37fQxPpqzsH8xvuqAeeuO/0H3e9Zn2dxwbK5JHXCH/AOJqNOhdSM1ZzVjRNwRbjGRxxzn"
-					+ "FdRouijV9Pi1C6toEMqn7MsK7SqBiCxOSSSVI5J4x6miiliW1FMzpbszreUw3H2VcuscpGT3UE9"
-					+ "Rn0HStE+IrZSQbEuRxvU4De4yc0UVFKCnuerms2vZryP/Z";
+			String photoString = """
+					/9j/4AAQSkZJRgABAQEAYABgAAD/2wBDAAgGBgcGBQgHBwcJCQgKDBQNDAsLDBkS\
+					Ew8UHRofHh0aHBwgJC4nICIsIxwcKDcpLDAxNDQ0Hyc5PTgyPC4zNDL/2wBDAQkJCQwLDBgNDRg\
+					yIRwhMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjL/wA\
+					ARCAAnABoDASIAAhEBAxEB/8QAHwAAAQUBAQEBAQEAAAAAAAAAAAECAwQFBgcICQoL/8QAtRAAA\
+					gEDAwIEAwUFBAQAAAF9AQIDAAQRBRIhMUEGE1FhByJxFDKBkaEII0KxwRVS0fAkM2JyggkKFhcY\
+					GRolJicoKSo0NTY3ODk6Q0RFRkdISUpTVFVWV1hZWmNkZWZnaGlqc3R1dnd4eXqDhIWGh4iJipK\
+					TlJWWl5iZmqKjpKWmp6ipqrKztLW2t7i5usLDxMXGx8jJytLT1NXW19jZ2uHi4+Tl5ufo6erx8v\
+					P09fb3+Pn6/8QAHwEAAwEBAQEBAQEBAQAAAAAAAAECAwQFBgcICQoL/8QAtREAAgECBAQDBAcFB\
+					AQAAQJ3AAECAxEEBSExBhJBUQdhcRMiMoEIFEKRobHBCSMzUvAVYnLRChYkNOEl8RcYGRomJygp\
+					KjU2Nzg5OkNERUZHSElKU1RVVldYWVpjZGVmZ2hpanN0dXZ3eHl6goOEhYaHiImKkpOUlZaXmJm\
+					aoqOkpaanqKmqsrO0tba3uLm6wsPExcbHyMnK0tPU1dbX2Nna4uPk5ebn6Onq8vP09fb3+Pn6/9\
+					oADAMBAAIRAxEAPwDx2z0mK6gV/tSo2SCpUHGD9Qa2vDvgGfX7+eI3ot4EOEmEefMOOcZPQdOvW\
+					s3VLGzsWiihUvM0ayONxATPIHXk4wfxFdd4L1aw0rw3eS3V3GHWRswkgugwCpVSckEk9OhB9azu\
+					2ro6lCKnyyZwmvaHcaBrV1plxKkkluw+dRkMCAQfbgjiqi27sob1GfuVc1q9n1XVL3UdqxJI/wD\
+					q/MXIXGAMd+B2HWoUZ1jUbZeABwKqzMJWT0Ld3cfaJ5ZFYtnCg+oUBf6V2XhvwVpcvhxfFXibVF\
+					tNK3lEgjJ3yMGK7SRzkkHhRnHORXJQ6exVXB2r1K9Cfx7V0UWpeD7S3WJ9N1TUPLYssV7cBYkZg\
+					AxAU4zwOcZ4HoKtppWQ4tSk5SNPx14o8M3/AITXT/D2kRRxB1jE4RIyuOc7ME84PzcHr2PPmX2y\
+					YcZX8q37fQxPpqzsH8xvuqAeeuO/0H3e9Zn2dxwbK5JHXCH/AOJqNOhdSM1ZzVjRNwRbjGRxxzn\
+					FdRouijV9Pi1C6toEMqn7MsK7SqBiCxOSSSVI5J4x6miiliW1FMzpbszreUw3H2VcuscpGT3UE9\
+					Rn0HStE+IrZSQbEuRxvU4De4yc0UVFKCnuerms2vZryP/Z\
+					""";
 
 			byte[] photoBytes = photoString.getBytes("US-ASCII");
 			photo = Base64.getDecoder().decode(photoBytes);
@@ -246,9 +248,9 @@ public final class LdapTests {
 		new ExecuteRunnable<Person>().runTests(new RunnableTests<Person>() {
 			public void runTest(Person testData) {
 				Name dn = testData.getDn();
-				LOG.debug(String.format("reading - %1$s", dn));
+				LOG.debug("reading - %1$s".formatted(dn));
 				Person personEntry = LdapTests.this.odmManager.read(Person.class, dn);
-				LOG.debug(String.format("read - %1$s", personEntry));
+				LOG.debug("read - %1$s".formatted(personEntry));
 				assertThat(testData).isEqualTo(personEntry);
 			}
 		}, this.personTestData);
@@ -272,10 +274,10 @@ public final class LdapTests {
 		new ExecuteRunnable<SearchTestData>().runTests(new RunnableTests<SearchTestData>() {
 			public void runTest(SearchTestData testData) {
 				String search = testData.search;
-				LOG.debug(String.format("searching - %1$s", search));
+				LOG.debug("searching - %1$s".formatted(search));
 				List<Person> results = LdapTests.this.odmManager.search(Person.class, baseName, testData.search,
 						testData.searchScope);
-				LOG.debug(String.format("found - %1$s", results));
+				LOG.debug("found - %1$s".formatted(results));
 				assertThat(new HashSet<Person>(Arrays.asList(testData.people))).isEqualTo(new HashSet<Person>(results));
 			}
 		}, this.searchTestData);
@@ -310,14 +312,14 @@ public final class LdapTests {
 		LOG.debug("Reading all organizatinalUnits");
 		List<OrganizationalUnit> allOus = this.odmManager.findAll(OrganizationalUnit.class, baseName,
 				this.searchControls);
-		LOG.debug(String.format("Found - %1$s", allOus));
+		LOG.debug("Found - %1$s".formatted(allOus));
 		assertThat(new HashSet<OrganizationalUnit>(Arrays.asList(ouTestData)))
 				.isEqualTo(new HashSet<OrganizationalUnit>(allOus));
 
 		OrganizationalUnit testOu = ouTestData[OrganizationalName.ASSISTANTS.getIndex()];
-		LOG.debug(String.format("Reading - %1$s", testOu.getDn()));
+		LOG.debug("Reading - %1$s".formatted(testOu.getDn()));
 		OrganizationalUnit ou = this.odmManager.read(OrganizationalUnit.class, testOu.getDn());
-		LOG.debug(String.format("Found - %1$s", ou));
+		LOG.debug("Found - %1$s".formatted(ou));
 		assertThat(testOu).isEqualTo(ou);
 	}
 
@@ -327,7 +329,7 @@ public final class LdapTests {
 	public void findAll() throws Exception {
 		LOG.debug("finding all people");
 		List<Person> allPeople = this.odmManager.findAll(Person.class, baseName, this.searchControls);
-		LOG.debug(String.format("found %1$s", allPeople));
+		LOG.debug("found %1$s".formatted(allPeople));
 		assertThat(new HashSet<Person>(Arrays.asList(this.personTestData))).isEqualTo(new HashSet<Person>(allPeople));
 	}
 
@@ -390,16 +392,16 @@ public final class LdapTests {
 	@Test
 	public void create() throws Exception {
 		for (Person person : this.createTestData) {
-			LOG.debug(String.format("creating - %1$s", person));
+			LOG.debug("creating - %1$s".formatted(person));
 			this.odmManager.create(person);
 		}
 		LOG.debug("Created all, reading back");
 		new ExecuteRunnable<Person>().runTests(new RunnableTests<Person>() {
 			public void runTest(Person testData) {
 				Name dn = testData.getDn();
-				LOG.debug(String.format("reading - %1$s", dn));
+				LOG.debug("reading - %1$s".formatted(dn));
 				Person personEntry = LdapTests.this.odmManager.read(Person.class, dn);
-				LOG.debug(String.format("read - %1$s", personEntry));
+				LOG.debug("read - %1$s".formatted(personEntry));
 				assertThat(testData).isEqualTo(personEntry);
 			}
 		}, this.createTestData);
@@ -429,7 +431,7 @@ public final class LdapTests {
 	@Test
 	public void delete() throws Exception {
 		for (Person toDelete : this.deleteData) {
-			LOG.debug(String.format("deleting - %1$s", toDelete.getDn()));
+			LOG.debug("deleting - %1$s".formatted(toDelete.getDn()));
 			this.odmManager.delete(toDelete);
 		}
 
@@ -537,7 +539,7 @@ public final class LdapTests {
 
 		@Override
 		public String toString() {
-			return String.format("short=%1$s, long=%2$s", this.shortName, this.longName);
+			return "short=%1$s, long=%2$s".formatted(this.shortName, this.longName);
 		}
 
 	}
@@ -563,7 +565,7 @@ public final class LdapTests {
 			throws Exception {
 
 		for (String testCase : testCases) {
-			LOG.debug(String.format("Starting ldap test case %1$s", testCase));
+			LOG.debug("Starting ldap test case %1$s".formatted(testCase));
 
 			// Set up
 			LdapTests ldapTests = new LdapTests();
@@ -576,7 +578,7 @@ public final class LdapTests {
 			// Tear down
 			ldapTests.tearDown();
 
-			LOG.debug(String.format("Test case %1$s completed", testCase));
+			LOG.debug("Test case %1$s completed".formatted(testCase));
 		}
 	}
 

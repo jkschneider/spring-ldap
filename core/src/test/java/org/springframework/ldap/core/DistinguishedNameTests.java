@@ -84,8 +84,10 @@ public class DistinguishedNameTests {
 	@Test
 	public void testDistinguishedName() {
 
-		String testPath = "cn=foo\\,bar,OU=FOO\\,bar , OU=foo\\;bar;OU=foo\\;bar"
-				+ " ; ou=foo\\,,ou=foo\\,;ou=foo\\;;ou=foo\\,;ou=bar\\,";
+		String testPath = """
+				cn=foo\\,bar,OU=FOO\\,bar , OU=foo\\;bar;OU=foo\\;bar\
+				 ; ou=foo\\,,ou=foo\\,;ou=foo\\;;ou=foo\\,;ou=bar\\,\
+				""";
 		System.out.println(testPath);
 
 		DistinguishedName path = new DistinguishedName(testPath);

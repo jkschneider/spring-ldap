@@ -328,8 +328,10 @@ public class DirContextAdapter implements DirContextOperations {
 				currentAttribute.initValuesAsNames();
 			}
 			catch (IllegalArgumentException ex) {
-				log.warn("Incompatible attributes; changed attribute has Name values but "
-						+ "original cannot be converted to this");
+				log.warn("""
+						Incompatible attributes; changed attribute has Name values but \
+						original cannot be converted to this\
+						""");
 			}
 		}
 

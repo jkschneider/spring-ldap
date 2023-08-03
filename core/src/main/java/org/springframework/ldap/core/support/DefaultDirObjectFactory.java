@@ -77,9 +77,7 @@ public class DefaultDirObjectFactory implements DirObjectFactory {
 			// the nameCtx parameter) this one really needs to be closed in
 			// order to correctly clean up and return the connection to the pool
 			// when we're finished with the surrounding operation.
-			if (obj instanceof Context) {
-
-				Context ctx = (Context) obj;
+			if (obj instanceof Context ctx) {
 				try {
 					ctx.close();
 				}
@@ -109,12 +107,12 @@ public class DefaultDirObjectFactory implements DirObjectFactory {
 		String nameString;
 		String referralUrl = "";
 
-		if (name instanceof CompositeName) {
+		if (name instanceof CompositeName compositeName) {
 			// Which it most certainly will be, and therein lies the
 			// problem. CompositeName.toString() completely screws up the
 			// formatting
 			// in some cases, particularly when backslashes are involved.
-			nameString = LdapUtils.convertCompositeNameToString((CompositeName) name);
+			nameString = LdapUtils.convertCompositeNameToString(compositeName);
 		}
 		else {
 			LOG.warn("Expecting a CompositeName as input to getObjectInstance but received a '"
@@ -141,8 +139,10 @@ public class DefaultDirObjectFactory implements DirObjectFactory {
 				nameString = pathString;
 			}
 			catch (URISyntaxException ex) {
-				throw new IllegalArgumentException("Supplied name starts with protocol prefix indicating a referral,"
-						+ " but is not possible to parse to an URI", ex);
+				throw new IllegalArgumentException("""
+						Supplied name starts with protocol prefix indicating a referral,\
+						 but is not possible to parse to an URI\
+						""", ex);
 			}
 			if (LOG.isDebugEnabled()) {
 				LOG.debug("Resulting name after removal of referral information: '" + nameString + "'");

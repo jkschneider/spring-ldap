@@ -1231,8 +1231,10 @@ public class LdapTemplate implements LdapOperations, InitializingBean {
 	private void assureReturnObjFlagSet(SearchControls controls) {
 		Assert.notNull(controls, "controls must not be null");
 		if (!controls.getReturningObjFlag()) {
-			LOG.debug("The returnObjFlag of supplied SearchControls is not set"
-					+ " but a ContextMapper is used - setting flag to true");
+			LOG.debug("""
+					The returnObjFlag of supplied SearchControls is not set\
+					 but a ContextMapper is used - setting flag to true\
+					""");
 			controls.setReturningObjFlag(true);
 		}
 	}
@@ -1422,8 +1424,8 @@ public class LdapTemplate implements LdapOperations, InitializingBean {
 		if (errorCallback.hasError()) {
 			Exception error = errorCallback.getError();
 
-			if (error instanceof NamingException) {
-				throw (NamingException) error;
+			if (error instanceof NamingException exception) {
+				throw exception;
 			}
 			else {
 				throw new UncategorizedLdapException(error);
@@ -1594,7 +1596,7 @@ public class LdapTemplate implements LdapOperations, InitializingBean {
 
 		if (LOG.isDebugEnabled()) {
 			LOG.debug(
-					String.format("Searching - base=%1$s, finalFilter=%2$s, scope=%3$s", base, filter, searchControls));
+"Searching - base=%1$s, finalFilter=%2$s, scope=%3$s".formatted(base, filter, searchControls));
 		}
 
 		assureReturnObjFlagSet(searchControls);
@@ -1616,7 +1618,7 @@ public class LdapTemplate implements LdapOperations, InitializingBean {
 	@Override
 	public <T> T findByDn(Name dn, final Class<T> clazz) {
 		if (LOG.isDebugEnabled()) {
-			LOG.debug(String.format("Reading Entry at - %1$s", dn));
+			LOG.debug("Reading Entry at - %1$s".formatted(dn));
 		}
 
 		// Make sure the class is OK before doing the lookup
@@ -1630,10 +1632,10 @@ public class LdapTemplate implements LdapOperations, InitializingBean {
 		});
 
 		if (result == null) {
-			throw new OdmException(String.format("Entry %1$s does not have the required objectclasses ", dn));
+			throw new OdmException("Entry %1$s does not have the required objectclasses ".formatted(dn));
 		}
 		if (LOG.isDebugEnabled()) {
-			LOG.debug(String.format("Found entry - %1$s", result));
+			LOG.debug("Found entry - %1$s".formatted(result));
 		}
 
 		return result;
@@ -1647,7 +1649,7 @@ public class LdapTemplate implements LdapOperations, InitializingBean {
 		Assert.notNull(entry, "Entry must not be null");
 
 		if (LOG.isDebugEnabled()) {
-			LOG.debug(String.format("Creating entry - %1$s", entry));
+			LOG.debug("Creating entry - %1$s".formatted(entry));
 		}
 
 		Name id = this.odm.getId(entry);
@@ -1656,7 +1658,7 @@ public class LdapTemplate implements LdapOperations, InitializingBean {
 			this.odm.setId(entry, id);
 		}
 
-		Assert.notNull(id, String.format("Unable to determine id for entry %s", entry.toString()));
+		Assert.notNull(id, "Unable to determine id for entry %s".formatted(entry.toString()));
 
 		DirContextAdapter context = new DirContextAdapter(id);
 		this.odm.mapToLdapDataEntry(entry, context);
@@ -1671,7 +1673,7 @@ public class LdapTemplate implements LdapOperations, InitializingBean {
 	public void update(Object entry) {
 		Assert.notNull(entry, "Entry must not be null");
 		if (LOG.isDebugEnabled()) {
-			LOG.debug(String.format("Updating entry - %1$s", entry));
+			LOG.debug("Updating entry - %1$s".formatted(entry));
 		}
 
 		Name originalId = this.odm.getId(entry);
@@ -1681,8 +1683,8 @@ public class LdapTemplate implements LdapOperations, InitializingBean {
 			// The DN has changed - remove the original entry and bind the new one
 			// (because other data may have changed as well
 			if (LOG.isDebugEnabled()) {
-				LOG.debug(String.format(
-						"Calculated DN of %s; of entry %s differs from explicitly specified one; %s - moving",
+				LOG.debug(
+	"Calculated DN of %s; of entry %s differs from explicitly specified one; %s - moving".formatted(
 						calculatedId, entry, originalId));
 			}
 
@@ -1703,7 +1705,7 @@ public class LdapTemplate implements LdapOperations, InitializingBean {
 				this.odm.setId(entry, calculatedId);
 			}
 
-			Assert.notNull(id, String.format("Unable to determine id for entry %s", entry.toString()));
+			Assert.notNull(id, "Unable to determine id for entry %s".formatted(entry.toString()));
 
 			DirContextOperations context = lookupContext(id);
 			this.odm.mapToLdapDataEntry(entry, context);
@@ -1718,7 +1720,7 @@ public class LdapTemplate implements LdapOperations, InitializingBean {
 	public void delete(Object entry) {
 		Assert.notNull(entry, "Entry must not be null");
 		if (LOG.isDebugEnabled()) {
-			LOG.debug(String.format("Deleting %1$s", entry));
+			LOG.debug("Deleting %1$s".formatted(entry));
 		}
 
 		Name id = this.odm.getId(entry);
@@ -1726,7 +1728,7 @@ public class LdapTemplate implements LdapOperations, InitializingBean {
 			id = this.odm.getCalculatedId(entry);
 		}
 
-		Assert.notNull(id, String.format("Unable to determine id for entry %s", entry.toString()));
+		Assert.notNull(id, "Unable to determine id for entry %s".formatted(entry.toString()));
 		unbind(id);
 	}
 
@@ -1767,8 +1769,8 @@ public class LdapTemplate implements LdapOperations, InitializingBean {
 		}
 
 		if (LOG.isDebugEnabled()) {
-			LOG.debug(String.format("Searching - base=%1$s, finalFilter=%2$s, scope=%3$s", base, finalFilter,
-					searchControls));
+			LOG.debug("Searching - base=%1$s, finalFilter=%2$s, scope=%3$s".formatted(base, finalFilter,
+searchControls));
 		}
 
 		List<T> result = search(localBase, finalFilter.encode(), searchControls, new ContextMapper<T>() {
@@ -1780,7 +1782,7 @@ public class LdapTemplate implements LdapOperations, InitializingBean {
 		result.remove(null);
 
 		if (LOG.isDebugEnabled()) {
-			LOG.debug(String.format("Found %1$s Entries - %2$s", result.size(), result));
+			LOG.debug("Found %1$s Entries - %2$s".formatted(result.size(), result));
 		}
 
 		return result;

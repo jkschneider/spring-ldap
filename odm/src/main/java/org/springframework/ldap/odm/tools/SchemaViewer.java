@@ -89,7 +89,7 @@ public final class SchemaViewer {
 
 		@Override
 		public String toString() {
-			return String.format("short=%1$s, long=%2$s", this.shortName, this.longName);
+			return "short=%1$s, long=%2$s".formatted(this.shortName, this.longName);
 		}
 
 	}
@@ -110,7 +110,7 @@ public final class SchemaViewer {
 
 		@Override
 		public String toString() {
-			return String.format("value=%1$s", this.value);
+			return "value=%1$s".formatted(this.value);
 		}
 
 	}
@@ -144,10 +144,10 @@ public final class SchemaViewer {
 		NamingEnumeration<? extends Attribute> attrsEnum = attrs.getAll();
 		while (attrsEnum.hasMore()) {
 			Attribute currentAttr = attrsEnum.next();
-			outstream.print(String.format("%1$s:", currentAttr.getID()));
+			outstream.print("%1$s:".formatted(currentAttr.getID()));
 			NamingEnumeration<?> valuesEnum = currentAttr.getAll();
 			while (valuesEnum.hasMoreElements()) {
-				outstream.print(String.format("%1$s ", valuesEnum.nextElement().toString()));
+				outstream.print("%1$s ".formatted(valuesEnum.nextElement().toString()));
 			}
 			outstream.println();
 		}
@@ -254,13 +254,13 @@ public final class SchemaViewer {
 
 		}
 		catch (AuthenticationException ex) {
-			System.err.println(String.format("Failed to bind to ldap server at %1$s", url));
+			System.err.println("Failed to bind to ldap server at %1$s".formatted(url));
 		}
 		catch (CommunicationException ex) {
-			System.err.println(String.format("Failed to contact ldap server at %1$s", url));
+			System.err.println("Failed to contact ldap server at %1$s".formatted(url));
 		}
 		catch (NameNotFoundException ex) {
-			System.err.println(String.format("Can't find object %1$s", ex.getMessage()));
+			System.err.println("Can't find object %1$s".formatted(ex.getMessage()));
 		}
 		catch (NamingException ex) {
 			System.err.println(ex.toString());

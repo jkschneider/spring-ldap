@@ -130,8 +130,10 @@ public class ContextSourceAndDataSourceTransactionManager extends DataSourceTran
 				throw ex;
 			}
 			else {
-				logger.warn("Failed to commit and resource is rollbackOnCommit not set -"
-						+ " proceeding to commit ldap resource.");
+				logger.warn("""
+						Failed to commit and resource is rollbackOnCommit not set -\
+						 proceeding to commit ldap resource.\
+						""");
 			}
 		}
 		this.ldapManagerDelegate.doCommit(new DefaultTransactionStatus(

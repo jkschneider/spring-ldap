@@ -81,8 +81,8 @@ public class DelegatingDirContext extends DelegatingContext implements DirContex
 	public DirContext getInnermostDelegateDirContext() {
 		final DirContext delegateDirContext = this.getDelegateDirContext();
 
-		if (delegateDirContext instanceof DelegatingDirContext) {
-			return ((DelegatingDirContext) delegateDirContext).getInnermostDelegateDirContext();
+		if (delegateDirContext instanceof DelegatingDirContext context) {
+			return context.getInnermostDelegateDirContext();
 		}
 
 		return delegateDirContext;
@@ -111,8 +111,8 @@ public class DelegatingDirContext extends DelegatingContext implements DirContex
 
 		final DirContext thisDirContext = this.getInnermostDelegateDirContext();
 		DirContext otherDirContext = (DirContext) obj;
-		if (otherDirContext instanceof DelegatingDirContext) {
-			otherDirContext = ((DelegatingDirContext) otherDirContext).getInnermostDelegateDirContext();
+		if (otherDirContext instanceof DelegatingDirContext context) {
+			otherDirContext = context.getInnermostDelegateDirContext();
 		}
 
 		return thisDirContext == otherDirContext || (thisDirContext != null && thisDirContext.equals(otherDirContext));

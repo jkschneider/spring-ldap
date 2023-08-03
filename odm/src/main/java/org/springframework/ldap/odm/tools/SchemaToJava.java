@@ -142,7 +142,7 @@ public final class SchemaToJava {
 
 		@Override
 		public String toString() {
-			return String.format("short=%1$s, long=%2$s", this.shortName, this.longName);
+			return "short=%1$s, long=%2$s".formatted(this.shortName, this.longName);
 		}
 
 	}
@@ -220,12 +220,12 @@ public final class SchemaToJava {
 					if (trimmed.charAt(0) != '#') {
 						String[] parts = trimmed.split(",");
 						if (parts.length != 2) {
-							throw new IOException(String.format("Failed to parse line \"%1$s\"", trimmed));
+							throw new IOException("Failed to parse line \"%1$s\"".formatted(trimmed));
 						}
 						String partOne = parts[0].trim();
 						String partTwo = parts[1].trim();
 						if (partOne.length() == 0 || partTwo.length() == 0) {
-							throw new IOException(String.format("Failed to parse line \"%1$s\"", trimmed));
+							throw new IOException("Failed to parse line \"%1$s\"".formatted(trimmed));
 						}
 						result.put(partOne, partTwo);
 					}
@@ -262,7 +262,7 @@ public final class SchemaToJava {
 		ObjectSchema schema = reader.getObjectSchema(objectClasses);
 
 		if (LOG.isDebugEnabled()) {
-			LOG.debug(String.format("Schema - %1$s", schema.toString()));
+			LOG.debug("Schema - %1$s".formatted(schema.toString()));
 		}
 
 		return schema;
@@ -293,7 +293,7 @@ public final class SchemaToJava {
 			out.flush();
 		}
 
-		LOG.debug(String.format("Writing java to: %1$s", outputFile.getAbsolutePath()));
+		LOG.debug("Writing java to: %1$s".formatted(outputFile.getAbsolutePath()));
 
 		FileOutputStream outputStream = new FileOutputStream(outputFile);
 		Writer out = new OutputStreamWriter(outputStream);
@@ -319,17 +319,17 @@ public final class SchemaToJava {
 		File directory = new File(directoryPath);
 		File outputFile = new File(directory, className + ".java");
 
-		LOG.debug(String.format("Attempting to create output file at %1$s", outputFile.getAbsolutePath()));
+		LOG.debug("Attempting to create output file at %1$s".formatted(outputFile.getAbsolutePath()));
 
 		try {
 			directory.mkdirs();
 			outputFile.createNewFile();
 		}
 		catch (SecurityException se) {
-			throw new IOException(String.format("Can't write to output file %1$s", outputFile.getAbsoluteFile()), se);
+			throw new IOException("Can't write to output file %1$s".formatted(outputFile.getAbsoluteFile()), se);
 		}
 		catch (IOException ioe) {
-			throw new IOException(String.format("Can't write to output file %1$s", outputFile.getAbsoluteFile()), ioe);
+			throw new IOException("Can't write to output file %1$s".formatted(outputFile.getAbsoluteFile()), ioe);
 		}
 
 		return outputFile;
@@ -348,7 +348,7 @@ public final class SchemaToJava {
 	}
 
 	private static void error(String message) {
-		System.err.println(String.format("%1$s: %2$s", SchemaToJava.class.getSimpleName(), message));
+		System.err.println("%1$s: %2$s".formatted(SchemaToJava.class.getSimpleName(), message));
 		System.exit(1);
 	}
 
@@ -419,30 +419,30 @@ public final class SchemaToJava {
 					syntaxToJavaClass = new SyntaxToJavaClass(readSyntaxMap(syntaxMapFile));
 				}
 				catch (IOException ex) {
-					error(String.format("Error reading syntax map file %1$s - %2$s", syntaxMapFile.getAbsolutePath(),
-							ex.toString()));
+					error("Error reading syntax map file %1$s - %2$s".formatted(syntaxMapFile.getAbsolutePath(),
+		ex.toString()));
 				}
 			}
 			else {
-				error(String.format("Cannot read syntax map file %s$1", syntaxMapFile.getAbsolutePath()));
+				error("Cannot read syntax map file %s$1".formatted(syntaxMapFile.getAbsolutePath()));
 			}
 		}
 
 		// Read binary mapping file
 		URL binarySetUrl = DEFAULT_LOADER_CLASS.getResource(BINARY_FILE);
 		if (binarySetUrl == null) {
-			error(String.format("Can't locatate binary mappings file %1$s", BINARY_FILE));
+			error("Can't locatate binary mappings file %1$s".formatted(BINARY_FILE));
 		}
 		File binarySetFile = new File(binarySetUrl.getFile());
 		if (!binarySetFile.canRead()) {
-			error(String.format("Can't read from binary mappings file %1$s", BINARY_FILE));
+			error("Can't read from binary mappings file %1$s".formatted(BINARY_FILE));
 		}
 		Set<String> binarySet = null;
 		try {
 			binarySet = readBinarySet(binarySetFile);
 		}
 		catch (IOException ex) {
-			error(String.format("Error reading binary set file %1$s - %2$s", binarySetFile.getAbsolutePath(), ex));
+			error("Error reading binary set file %1$s - %2$s".formatted(binarySetFile.getAbsolutePath(), ex));
 		}
 
 		// Read schema from the directory
@@ -451,10 +451,10 @@ public final class SchemaToJava {
 			schema = readSchema(url, user, pass, syntaxToJavaClass, binarySet, objectClasses);
 		}
 		catch (NamingException ne) {
-			error(String.format("Error processing schema - %1$s", ne));
+			error("Error processing schema - %1$s".formatted(ne));
 		}
 		catch (ClassNotFoundException cnfe) {
-			error(String.format("Error processing schema - %1$s", cnfe));
+			error("Error processing schema - %1$s".formatted(cnfe));
 		}
 
 		// Work out what imports we need
@@ -474,10 +474,10 @@ public final class SchemaToJava {
 			createCode(packageName, className, schema, imports, outputFile);
 		}
 		catch (TemplateException te) {
-			error(String.format("Error generating code - %1$s", te.toString()));
+			error("Error generating code - %1$s".formatted(te.toString()));
 		}
 		catch (IOException ioe) {
-			error(String.format("Error generatign code - %1$s", ioe.toString()));
+			error("Error generatign code - %1$s".formatted(ioe.toString()));
 		}
 	}
 

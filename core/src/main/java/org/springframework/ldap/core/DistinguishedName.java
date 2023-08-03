@@ -201,8 +201,8 @@ public class DistinguishedName implements Name {
 	 */
 	public DistinguishedName(Name name) {
 		Assert.notNull(name, "name cannot be null");
-		if (name instanceof CompositeName) {
-			parse(LdapUtils.convertCompositeNameToString((CompositeName) name));
+		if (name instanceof CompositeName compositeName) {
+			parse(LdapUtils.convertCompositeNameToString(compositeName));
 			return;
 		}
 		this.names = new LinkedList();
@@ -635,8 +635,8 @@ public class DistinguishedName implements Name {
 		}
 
 		DistinguishedName start = null;
-		if (name instanceof DistinguishedName) {
-			start = (DistinguishedName) name;
+		if (name instanceof DistinguishedName distinguishedName) {
+			start = distinguishedName;
 		}
 		else {
 			return false;
@@ -672,8 +672,8 @@ public class DistinguishedName implements Name {
 	 */
 	public boolean endsWith(Name name) {
 		DistinguishedName path = null;
-		if (name instanceof DistinguishedName) {
-			path = (DistinguishedName) name;
+		if (name instanceof DistinguishedName distinguishedName) {
+			path = distinguishedName;
 		}
 		else {
 			return false;

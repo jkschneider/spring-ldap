@@ -67,13 +67,12 @@ public class BasicSchemaSpecification implements Specification<LdapAttributes> {
 
 		Object object = record.get(rdn.getType()).get();
 
-		if (object instanceof String) {
-			String value = (String) object;
+		if (object instanceof String value) {
 			return ((String) rdn.getValue()).equalsIgnoreCase(value);
 		}
-		else if (object instanceof byte[]) {
+		else if (object instanceof byte[] bytes) {
 			String rdnValue = LdapEncoder.printBase64Binary(((String) rdn.getValue()).getBytes());
-			String attributeValue = LdapEncoder.printBase64Binary((byte[]) object);
+			String attributeValue = LdapEncoder.printBase64Binary(bytes);
 			return rdnValue.equals(attributeValue);
 		}
 

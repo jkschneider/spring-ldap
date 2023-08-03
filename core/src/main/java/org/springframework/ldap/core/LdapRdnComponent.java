@@ -184,8 +184,7 @@ public class LdapRdnComponent implements Comparable, Serializable {
 	public boolean equals(Object obj) {
 		// Slightly more lenient equals comparison here to enable immutable
 		// instances to equal mutable ones.
-		if (obj != null && obj instanceof LdapRdnComponent) {
-			LdapRdnComponent that = (LdapRdnComponent) obj;
+		if (obj != null && obj instanceof LdapRdnComponent that) {
 			// It's safe to compare directly against key and value,
 			// because they are validated not to be null on instance creation.
 			return this.key.equalsIgnoreCase(that.key) && this.value.equalsIgnoreCase(that.value);

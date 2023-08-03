@@ -59,8 +59,8 @@ public class TransactionManagerParser implements BeanDefinitionParser {
 		String sessionFactoryRef = element.getAttribute(ATT_SESSION_FACTORY_REF);
 
 		if (StringUtils.hasText(dataSourceRef) && StringUtils.hasText(sessionFactoryRef)) {
-			throw new IllegalArgumentException(String.format("Only one of %s and %s can be specified",
-					ATT_DATA_SOURCE_REF, ATT_SESSION_FACTORY_REF));
+			throw new IllegalArgumentException("Only one of %s and %s can be specified".formatted(
+ATT_DATA_SOURCE_REF, ATT_SESSION_FACTORY_REF));
 		}
 
 		BeanDefinitionBuilder builder;
